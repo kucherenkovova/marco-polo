@@ -1,19 +1,32 @@
 package main
 
 import (
+	"fmt"
 	pb "github.com/kucherenkovova/marco-polo/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
+	"os"
 	"time"
 )
 
 const (
-	address = "localhost:50051"
+	HostKey = "ADAPTER_HOST"
+	PortKey = "ADAPTER_PORT"
 )
 
 func main() {
 	log.Println("client start")
+	host, ok := os.LookupEnv(HostKey)
+	if !ok {
+		log.Fatalf("Env variable %s not found", HostKey)
+	}
+	port, ok := os.LookupEnv(PortKey)
+	if !ok {
+		log.Fatalf("Env variable %s not found", PortKey)
+	}
+	address := fmt.Sprintf("%s:%s", host, port)
+
 	conn, err := grpc.Dial(address, grpc.WithInsecure())
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
