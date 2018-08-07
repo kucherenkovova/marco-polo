@@ -1,10 +1,14 @@
-proto:
-	protoc -I ./proto --go_out=plugins=grpc:./proto ./proto/*.proto
+all: protoc client server adapter
 
-client: proto
+protoc: proto/services.proto proto/messages.proto
+	protoc -I ./proto --go_out=plugins=grpc:./proto proto/services.proto proto/messages.proto
 
-server: proto
+client: ./services/client/main.go ./proto/services.pb.go ./proto/messages.pb.go
+	go build -o client services/client/main.go
 
-adapter: proto
+server: ./services/server/main.go ./proto/services.pb.go ./proto/messages.pb.go
+	go build -o server services/server/main.go
 
-all: client adapter server
+adapter: ./services/adapter/main.go ./proto/services.pb.go ./proto/messages.pb.go
+	go build -o adapter services/adapter/main.go
+
