@@ -1,0 +1,13 @@
+package: github.com/kucherenkovova/marco-polo
+import:
+- package: github.com/golang/protobuf
+  version: v1.1.0
+  subpackages:
+  - proto
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: google.golang.org/grpc
+  version: v1.14.0
+  subpackages:
+  - reflection
