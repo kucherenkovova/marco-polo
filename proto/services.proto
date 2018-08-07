@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package proto;
+
+import "messages.proto";
+
+service Server {
+    rpc Send (Phrase) returns (Phrase) {}
+};
+
+service Adapter {
+    rpc Forward (Phrase) returns (Phrase) {}
+};
