@@ -11,4 +11,3 @@ server: services/server/main.go proto/services.pb.go proto/messages.pb.go
 
 adapter: services/adapter/main.go proto/services.pb.go proto/messages.pb.go
 	go build -o adapter services/adapter/main.go
-
