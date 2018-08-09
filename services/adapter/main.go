@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/kucherenkovova/marco-polo/proto"
-	"github.com/kucherenkovova/marco-polo/services/adapter/adapter"
+	"github.com/kucherenkovova/marco-polo/services/adapter/adapters"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"
@@ -31,9 +31,11 @@ func main() {
 
 	// client init end
 
-	a, err := adapter.NewMarcoPoloAdapter(c)
+	a, err := adapters.NewAdapter(c)
+	inLookupAdapter, err := adapters.NewDictInLookupAdapter(a)
+	inOutLookupAdapter, err := adapters.NewDictOutLookupAdapter(inLookupAdapter)
 
-	proto.RegisterAdapterServer(s, a)
+	proto.RegisterAdapterServer(s, inOutLookupAdapter)
 	reflection.Register(s)
 	if err := s.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)

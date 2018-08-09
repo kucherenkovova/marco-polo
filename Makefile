@@ -1,3 +1,5 @@
+SHELL := /bin/bash
+
 all: protoc client server adapter
 
 protoc: proto/services.proto proto/messages.proto
