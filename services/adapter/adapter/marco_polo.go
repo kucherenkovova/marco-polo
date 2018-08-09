@@ -1,6 +1,7 @@
 package adapter
 
 import (
+	"errors"
 	"github.com/kucherenkovova/marco-polo/proto"
 	"golang.org/x/net/context"
 	"log"
@@ -11,6 +12,8 @@ type MarcoPoloAdapter struct {
 	OutDict      map[string]string
 	ServerClient proto.ServerClient
 }
+
+var MissingSCErr = errors.New("Can't establish connection to Server. ServerClient is nil.")
 
 func (a *MarcoPoloAdapter) Forward(ctx context.Context, phrase *proto.Phrase) (*proto.Phrase, error) {
 	word, ok := a.InDict[phrase.Word]
@@ -24,7 +27,10 @@ func (a *MarcoPoloAdapter) Forward(ctx context.Context, phrase *proto.Phrase) (*
 	return &proto.Phrase{Word: a.OutDict[res.Word]}, nil
 }
 
-func NewMarcoPoloAdapter(sc proto.ServerClient) *MarcoPoloAdapter {
+func NewMarcoPoloAdapter(sc proto.ServerClient) (*MarcoPoloAdapter, error) {
+	if sc == nil {
+		return nil, MissingSCErr
+	}
 	return &MarcoPoloAdapter{
 		InDict: map[string]string{
 			"marco": "monkey",
@@ -35,5 +41,5 @@ func NewMarcoPoloAdapter(sc proto.ServerClient) *MarcoPoloAdapter {
 			"follow": "polo",
 		},
 		ServerClient: sc,
-	}
+	}, nil
 }

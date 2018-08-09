@@ -31,7 +31,7 @@ func main() {
 
 	// client init end
 
-	a := adapter.NewMarcoPoloAdapter(c)
+	a, err := adapter.NewMarcoPoloAdapter(c)
 
 	proto.RegisterAdapterServer(s, a)
 	reflection.Register(s)
