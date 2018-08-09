@@ -13,6 +13,3 @@ vendor/*
 
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
-adapter
-client
-server
