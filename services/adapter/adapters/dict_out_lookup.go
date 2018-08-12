@@ -12,6 +12,9 @@ type DictOutLookupAdapter struct {
 
 func (a *DictOutLookupAdapter) Forward(ctx context.Context, phrase *proto.Phrase) (*proto.Phrase, error) {
 	res, err := a.Forwarder.Forward(ctx, phrase)
+	if err != nil {
+		return nil, err
+	}
 	return &proto.Phrase{Word: a.Dict[res.Word]}, err
 }
 

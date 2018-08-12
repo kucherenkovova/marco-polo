@@ -1,6 +1,7 @@
 package adapters
 
 import (
+	"fmt"
 	"github.com/kucherenkovova/marco-polo/proto"
 	"golang.org/x/net/context"
 	"log"
@@ -15,9 +16,9 @@ func (a *DictInLookupAdapter) Forward(ctx context.Context, phrase *proto.Phrase)
 	word, ok := a.Dict[phrase.Word]
 	if !ok {
 		log.Printf("missing word in dict: %s", phrase.Word)
+		return nil, fmt.Errorf("missing word '%s' in lookup", phrase.Word)
 	}
-	res, err := a.Forwarder.Forward(ctx, &proto.Phrase{Word: word})
-	return res, err
+	return a.Forwarder.Forward(ctx, &proto.Phrase{Word: word})
 }
 
 func NewDictInLookupAdapter(f Forwarder) (*DictInLookupAdapter, error) {

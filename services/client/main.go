@@ -32,6 +32,7 @@ func main() {
 
 	res, err := c.Forward(ctx, &pb.Phrase{Word: word})
 	if err != nil {
+		// todo: fix err msg
 		log.Fatalf("did not connect: %v", err)
 	}
 
