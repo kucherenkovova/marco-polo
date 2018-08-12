@@ -18,12 +18,9 @@ func (a *DictOutLookupAdapter) Forward(ctx context.Context, phrase *proto.Phrase
 	return &proto.Phrase{Word: a.Dict[res.Word]}, err
 }
 
-func NewDictOutLookupAdapter(f Forwarder) (*DictOutLookupAdapter, error) {
+func NewDictOutLookupAdapter(f Forwarder, d Dictionary) (*DictOutLookupAdapter, error) {
 	return &DictOutLookupAdapter{
-		Dict: map[string]string{
-			"monkey": "marco",
-			"follow": "polo",
-		},
+		Dict:      d,
 		Forwarder: f,
 	}, nil
 }

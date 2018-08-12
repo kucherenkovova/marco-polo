@@ -15,18 +15,15 @@ type DictInLookupAdapter struct {
 func (a *DictInLookupAdapter) Forward(ctx context.Context, phrase *proto.Phrase) (*proto.Phrase, error) {
 	word, ok := a.Dict[phrase.Word]
 	if !ok {
-		log.Printf("missing word in dict: %s", phrase.Word)
+		log.Printf("missing word in Dictionary: %s", phrase.Word)
 		return nil, fmt.Errorf("missing word '%s' in lookup", phrase.Word)
 	}
 	return a.Forwarder.Forward(ctx, &proto.Phrase{Word: word})
 }
 
-func NewDictInLookupAdapter(f Forwarder) (*DictInLookupAdapter, error) {
+func NewDictInLookupAdapter(f Forwarder, d Dictionary) (*DictInLookupAdapter, error) {
 	return &DictInLookupAdapter{
-		Dict: map[string]string{
-			"marco": "monkey",
-			"polo":  "follow",
-		},
+		Dict:      d,
 		Forwarder: f,
 	}, nil
 }

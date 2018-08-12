@@ -6,6 +6,8 @@ import (
 	"golang.org/x/net/context"
 )
 
+type Dictionary map[string]string
+
 type Forwarder interface {
 	Forward(context.Context, *proto.Phrase) (*proto.Phrase, error)
 }

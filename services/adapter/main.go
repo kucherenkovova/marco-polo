@@ -32,8 +32,14 @@ func main() {
 	// client init end
 
 	a, err := adapters.NewAdapter(c)
-	inLookupAdapter, err := adapters.NewDictInLookupAdapter(a)
-	inOutLookupAdapter, err := adapters.NewDictOutLookupAdapter(inLookupAdapter)
+	inLookupAdapter, err := adapters.NewDictInLookupAdapter(a, adapters.Dictionary{
+		"marco": "monkey",
+		"polo":  "follow",
+	})
+	inOutLookupAdapter, err := adapters.NewDictOutLookupAdapter(inLookupAdapter, adapters.Dictionary{
+		"monkey": "marco",
+		"follow": "polo",
+	})
 
 	proto.RegisterAdapterServer(s, inOutLookupAdapter)
 	reflection.Register(s)
