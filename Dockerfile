@@ -8,9 +8,11 @@ RUN mkdir -p ${PROJECT}
 
 WORKDIR ${PROJECT}
 
-COPY . .
+COPY glide.lock glide.yaml ./
 
 RUN glide install
+
+COPY . .
 
 RUN make ${SERVICE}
 
@@ -22,7 +24,7 @@ ARG PROJECT
 
 WORKDIR /root
 
-COPY --from=builder ${PROJECT}/${SERVICE} .
+COPY --from=builder ${PROJECT}/bin/${SERVICE} .
 
 # TODO: create user for running application in non-root way
 

@@ -1,3 +1,5 @@
 /Dockerfile
 /.git
 *.proto
+/bin
+/vendor
