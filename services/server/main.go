@@ -22,7 +22,7 @@ func (s *MarcoPoloServer) Send(ctx context.Context, phrase *proto.Phrase) (*prot
 }
 
 func main() {
-
+	log.Println("start server")
 	lis, err := net.Listen("tcp", port)
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
