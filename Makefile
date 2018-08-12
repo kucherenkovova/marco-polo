@@ -1,3 +1,5 @@
+PROJECT=/go/src/github.com/kucherenkovova/marco-polo
+
 all: protoc client server adapter
 
 protoc: proto/services.proto proto/messages.proto
@@ -11,3 +13,8 @@ server: services/server/main.go proto/services.pb.go proto/messages.pb.go
 
 adapter: services/adapter/main.go proto/services.pb.go proto/messages.pb.go
 	go build -o adapter services/adapter/main.go
+
+images:
+	docker build --build-arg "SERVICE=adapter" --build-arg "PROJECT=$(PROJECT)" -t mikefaraponov/marco-polo-adapter .
+	docker build --build-arg "SERVICE=client" --build-arg "PROJECT=$(PROJECT)" -t mikefaraponov/marco-polo-client .
+	docker build --build-arg SERVICE=server --build-arg "PROJECT=$(PROJECT)" -t mikefaraponov/marco-polo-server .
