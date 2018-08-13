@@ -32,8 +32,7 @@ func main() {
 
 	res, err := c.Forward(ctx, &pb.Phrase{Word: word})
 	if err != nil {
-		// todo: fix err msg
-		log.Fatalf("Could not connect to : %v", err)
+		log.Fatalf("Error while forwarding message %s : %v", word, err)
 	}
 
 	log.Printf("%s", res)
