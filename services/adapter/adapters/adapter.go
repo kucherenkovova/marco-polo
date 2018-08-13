@@ -21,7 +21,7 @@ func (a *adapter) Forward(ctx context.Context, phrase *proto.Phrase) (*proto.Phr
 	return res, err
 }
 
-func NewAdapter(sc proto.ServerClient) (*adapter, error) {
+func NewAdapter(sc proto.ServerClient) (Forwarder, error) {
 	if sc == nil {
 		return nil, errors.New("Can't establish connection to Server. ServerClient is nil.")
 	}
