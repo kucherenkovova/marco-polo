@@ -7,7 +7,7 @@ import (
 
 type dictOutLookupAdapter struct {
 	Forwarder
-	outLookup map[string]string
+	outLookup Dictionary
 }
 
 func (a *dictOutLookupAdapter) Forward(ctx context.Context, phrase *proto.Phrase) (*proto.Phrase, error) {

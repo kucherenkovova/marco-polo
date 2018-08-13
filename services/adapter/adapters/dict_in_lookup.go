@@ -9,7 +9,7 @@ import (
 
 type dictInLookupAdapter struct {
 	Forwarder
-	inLookup map[string]string
+	inLookup Dictionary
 }
 
 func (a *dictInLookupAdapter) Forward(ctx context.Context, phrase *proto.Phrase) (*proto.Phrase, error) {
