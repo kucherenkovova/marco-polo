@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "github.com/kucherenkovova/marco-polo/proto"
+	pb "github.com/kucherenkovova/marco-polo.git/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"log"
@@ -33,7 +33,7 @@ func main() {
 	res, err := c.Forward(ctx, &pb.Phrase{Word: word})
 	if err != nil {
 		// todo: fix err msg
-		log.Fatalf("did not connect: %v", err)
+		log.Fatalf("Could not connect to : %v", err)
 	}
 
 	log.Printf("%s", res)

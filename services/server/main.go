@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/kucherenkovova/marco-polo/proto"
+	"github.com/kucherenkovova/marco-polo.git/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"

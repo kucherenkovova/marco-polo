@@ -1,5 +1,5 @@
 SHELL := /bin/bash
-PROJECT=/go/src/github.com/kucherenkovova/marco-polo
+PROJECT=/go/src/github.com/kucherenkovova/marco-polo.git
 
 all: protoc client server adapter
 

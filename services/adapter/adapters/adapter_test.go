@@ -3,8 +3,8 @@ package adapters
 import (
 	"errors"
 	"github.com/golang/mock/gomock"
-	"github.com/kucherenkovova/marco-polo/proto"
-	"github.com/kucherenkovova/marco-polo/services/adapter/mocks"
+	"github.com/kucherenkovova/marco-polo.git/proto"
+	"github.com/kucherenkovova/marco-polo.git/services/adapter/mocks"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"golang.org/x/net/context"
@@ -31,7 +31,7 @@ var _ = Describe("Test Marco Polo adapter", func() {
 	It("should fail if ServerClient is nil", func() {
 		a, err := NewAdapter(nil)
 		Expect(err).ToNot(BeNil())
-		Expect(err).To(Equal(MissingSCErr))
+		Expect(err.Error()).To(ContainSubstring("Can't establish connection to Server. ServerClient is nil."))
 		Expect(a).To(BeNil())
 	})
 
@@ -57,7 +57,7 @@ var _ = Describe("Test Marco Polo adapter", func() {
 		Expect(err).ToNot(BeNil())
 	})
 
-	It("DictOutLookupAdapter should map follow -> polo", func() {
+	It("dictOutLookupAdapter should map follow -> polo", func() {
 		adapter, _ := NewAdapter(serverClientMock)
 		a, _ := NewDictOutLookupAdapter(adapter, outDict)
 		ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
@@ -66,7 +66,7 @@ var _ = Describe("Test Marco Polo adapter", func() {
 		Expect(res.Word).To(Equal("polo"))
 		Expect(err).To(BeNil())
 	})
-	It("DictOutLookupAdapter should map monkey -> marco", func() {
+	It("dictOutLookupAdapter should map monkey -> marco", func() {
 		adapter, _ := NewAdapter(serverClientMock)
 		a, _ := NewDictOutLookupAdapter(adapter, outDict)
 		ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
@@ -75,7 +75,7 @@ var _ = Describe("Test Marco Polo adapter", func() {
 		Expect(res.Word).To(Equal("marco"))
 		Expect(err).To(BeNil())
 	})
-	It("DictOutLookupAdapter should return error if no key found", func() {
+	It("dictOutLookupAdapter should return error if no key found", func() {
 		adapter, _ := NewAdapter(serverClientMock)
 		a, _ := NewDictOutLookupAdapter(adapter, outDict)
 		ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)

@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/kucherenkovova/marco-polo/proto"
+	"github.com/kucherenkovova/marco-polo.git/proto"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 )

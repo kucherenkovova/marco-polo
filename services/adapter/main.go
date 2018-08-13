@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/kucherenkovova/marco-polo/proto"
-	"github.com/kucherenkovova/marco-polo/services/adapter/adapters"
+	"github.com/kucherenkovova/marco-polo.git/proto"
+	"github.com/kucherenkovova/marco-polo.git/services/adapter/adapters"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 	"log"

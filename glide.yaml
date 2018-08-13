@@ -1,4 +1,4 @@
-package: github.com/kucherenkovova/marco-polo
+package: github.com/kucherenkovova/marco-polo.git
 import:
 - package: github.com/golang/protobuf
   version: v1.1.0
